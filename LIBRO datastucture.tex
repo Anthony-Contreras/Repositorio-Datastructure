@@ -1,0 +1,1070 @@
+\documentclass[a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{tikz}
+\usepackage{geometry}
+\usepackage[T1]{fontenc}
+\usepackage[spanish]{babel}
+\usepackage{amsmath}
+\usepackage{listings}
+\usepackage{fancyhdr}
+\usepackage{xcolor}
+\usepackage{hyperref}
+
+\geometry{margin=1cm}
+\pagestyle{empty}
+
+\definecolor{codegray}{gray}{0.9}
+\lstset{
+    backgroundcolor=\color{white},
+    basicstyle=\ttfamily\small,
+    breaklines=true,
+    frame=single,
+    language=C++,
+    keywordstyle=\color{blue}\bfseries,
+    commentstyle=\color{green!60!black},
+    stringstyle=\color{red},
+    showstringspaces=false,
+    numbers=left,
+    numberstyle=\tiny,
+    numbersep=5pt,
+    tabsize=4,
+    captionpos=b
+}
+\begin{document}
+\begin{tikzpicture}[remember picture, overlay]
+  \fill[blue!80] (current page.south west) rectangle (current page.north east);
+  \fill[blue!50] (current page.south west) rectangle ([yshift=12cm]current page.south east);
+  \draw[line width=5pt, white] ([xshift=1cm,yshift=-1cm]current page.north west) rectangle ([xshift=-1cm,yshift=1cm]current page.south east);
+  \node[text=white, font=\bfseries\fontsize{40}{48}\selectfont, align=center] at ([yshift=4cm]current page.center) {
+    LIBRO DATA-STRUCTURE
+  };
+  \draw[white, line width=2pt] ([xshift=-6cm,yshift=3.3cm]current page.center) -- ([xshift=6cm,yshift=3.3cm]current page.center);
+  \node[text=white!85, font=\itshape\large, align=center] at ([yshift=2.5cm]current page.center) {
+    UNIVERSIDAD NACIONAL DEL ALTIPLANO
+    Facultad de Ingenieria Estadistica e Informatica
+  };
+  \node[text=white, font=\Large\itshape] at ([yshift=-5cm]current page.center) {Anthony Contreras};
+  \node[text=white!70, font=\small] at ([yshift=-6cm]current page.center) {Estructura de datos\quad | \quad 2025};
+  \fill[white, opacity=0.1] ([xshift=5cm,yshift=-3cm]current page.center) circle (5cm);
+  \fill[white, opacity=0.07] ([xshift=-8cm,yshift=-10cm]current page.center) rectangle ([xshift=-7cm,yshift=10cm]current page.center);
+
+\end{tikzpicture}
+
+\newpage
+\tableofcontents
+\newpage
+\pagestyle{fancy}
+\fancyhead[L]{C++} 
+\fancyhead[R]{\thepage} 
+
+
+\title{INTRODUCCION}
+\section{¿Qué es C++?}
+
+C++ es un lenguaje de programación desarrollado a principios de los años 80 por Bjarne Stroustrup. Es una evolución del lenguaje C, añadiendo soporte para programación orientada a objetos (POO), además de ser un lenguaje multiparadigma que permite:
+
+\begin{itemize}
+    \item Programación estructurada (como en C)
+    \item Programación orientada a objetos
+    \item Programación genérica (con plantillas)
+    \item Programación funcional (en menor medida)
+\end{itemize}
+
+Se utiliza en aplicaciones que requieren alto rendimiento, como videojuegos, motores gráficos, sistemas embebidos, software de sistemas, simuladores, bases de datos y mucho más.
+
+\section{Características principales}
+
+\begin{itemize}
+    \item \textbf{Compilado y eficiente:} Los programas en C++ se traducen a código máquina que el ordenador entiende directamente, lo que hace que los programas sean muy rápidos.
+    \item \textbf{Control bajo nivel:} Permite manejar directamente memoria y recursos del sistema.
+    \item \textbf{Lenguaje fuerte y estáticamente tipado:} Los tipos de datos son verificados en tiempo de compilación, evitando muchos errores comunes.
+    \item \textbf{Soporte a POO:} Encapsulación, herencia, polimorfismo.
+    \item \textbf{Bibliotecas estándar potentes:} STL (Standard Template Library), que incluye contenedores (vectores, listas), algoritmos y más.
+    \item \textbf{Portabilidad:} Puede ejecutarse en diferentes sistemas operativos con pocas modificaciones.
+\end{itemize}
+
+\section{Estructura básica de un programa en C++}
+
+\begin{lstlisting}[language=C++]
+// Biblioteca para entrada y salida estándar
+#include <iostream>
+
+// Función principal: punto de entrada al programa
+int main() {
+    std::cout << "¡Hola, mundo!" << std::endl;  // Imprime en pantalla
+    return 0;  // Indica que el programa terminó correctamente
+}
+\end{lstlisting}
+
+\begin{itemize}
+    \item \texttt{\#include}: directiva para incluir librerías.
+    \item \texttt{main()}: función que se ejecuta al iniciar el programa.
+    \item \texttt{std::cout}: flujo de salida estándar, usado para imprimir.
+    \item \texttt{return 0;}: indica éxito en la ejecución.
+\end{itemize}
+
+\section{Tipos de datos fundamentales}
+
+\begin{tabular}{|l|l|l|}
+\hline
+\textbf{Tipo} & \textbf{Descripción} & \textbf{Ejemplo} \\
+\hline
+\texttt{int} & Enteros (números sin decimales) & \texttt{int edad = 30;} \\
+\texttt{float} & Números con decimales (precisión simple) & \texttt{float pi = 3.14;} \\
+\texttt{double} & Números con decimales (precisión doble) & \texttt{double e = 2.718;} \\
+\texttt{char} & Carácter simple & \texttt{char letra = 'A';} \\
+\texttt{bool} & Booleano (verdadero/falso) & \texttt{bool esVerdad = true;} \\
+\texttt{string} & Cadena de caracteres (texto) & \texttt{std::string nombre = "Ana";} \\
+\hline
+\end{tabular}
+
+\vspace{0.3cm}
+\noindent Para usar \texttt{string}, debes incluir la librería \texttt{\#include <string>}.
+
+\section{Variables y constantes}
+
+\textbf{Variable:} espacio en memoria con un nombre que almacena datos que pueden cambiar.
+
+\begin{lstlisting}[language=C++]
+int numero = 5;
+numero = 10;  // Cambiar valor
+\end{lstlisting}
+
+\textbf{Constante:} valor fijo que no cambia durante la ejecución.
+
+\begin{lstlisting}[language=C++]
+const float PI = 3.14159;
+\end{lstlisting}
+
+\section{Operadores básicos}
+
+\begin{tabular}{|l|l|l|}
+\hline
+\textbf{Operador} & \textbf{Descripción} & \textbf{Ejemplo} \\
+\hline
+\texttt{+} & Suma & \texttt{a + b} \\
+\texttt{-} & Resta & \texttt{a - b} \\
+\texttt{*} & Multiplicación & \texttt{a * b} \\
+\texttt{/} & División & \texttt{a / b} \\
+\texttt{\%} & Módulo (resto) & \texttt{a \% b} \\
+\texttt{++} & Incremento en 1 & \texttt{i++} o \texttt{++i} \\
+\texttt{--} & Decremento en 1 & \texttt{i--} o \texttt{--i} \\
+\hline
+\end{tabular}
+
+\section{Estructuras de control}
+
+\subsection{Condicionales}
+
+\begin{lstlisting}[language=C++]
+if (x > 0) {
+    std::cout << "Positivo\n";
+} else if (x < 0) {
+    std::cout << "Negativo\n";
+} else {
+    std::cout << "Cero\n";
+}
+\end{lstlisting}
+
+\subsection{Bucles}
+
+\textbf{for}
+
+\begin{lstlisting}[language=C++]
+for (int i = 0; i < 5; i++) {
+    std::cout << i << " ";
+}
+\end{lstlisting}
+
+\textbf{while}
+
+\begin{lstlisting}[language=C++]
+int i = 0;
+while (i < 5) {
+    std::cout << i << " ";
+    i++;
+}
+\end{lstlisting}
+
+\textbf{do-while}
+
+\begin{lstlisting}[language=C++]
+int i = 0;
+do {
+    std::cout << i << " ";
+    i++;
+} while (i < 5);
+\end{lstlisting}
+
+\newpage
+\title{FUNCIONES}
+\section{¿Qué es una función?}
+
+Una función es un bloque de código que realiza una tarea específica, puede recibir datos de entrada (parámetros) y devolver un resultado (valor de retorno). Facilitan la reutilización y organización del código.
+
+\section{Sintaxis básica}
+
+La estructura general de una función en C++ es:
+
+\begin{lstlisting}[language=C++]
+tipo_de_retorno nombre_funcion(parámetros) {
+    // cuerpo de la función
+    return valor; // si el tipo de retorno no es void
+}
+\end{lstlisting}
+
+Donde:
+\begin{itemize}
+    \item \texttt{tipo\_de\_retorno}: tipo de dato que la función devuelve (puede ser \texttt{void} si no devuelve nada).
+    \item \texttt{nombre\_funcion}: identificador que nombra la función.
+    \item \texttt{parámetros}: lista de variables que la función recibe (puede estar vacía).
+\end{itemize}
+
+\section{Ejemplo simple}
+
+\begin{lstlisting}[language=C++]
+// Función que suma dos números enteros
+int sumar(int a, int b) {
+    return a + b;
+}
+
+int main() {
+    int resultado = sumar(5, 3);
+    std::cout << "La suma es: " << resultado << std::endl;
+    return 0;
+}
+\end{lstlisting}
+
+\section{Funciones sin valor de retorno (void)}
+
+Si una función no devuelve nada, su tipo de retorno es \texttt{void}.
+
+\begin{lstlisting}[language=C++]
+void saludar() {
+    std::cout << "¡Hola a todos!" << std::endl;
+}
+
+int main() {
+    saludar();
+    return 0;
+}
+\end{lstlisting}
+
+\section{Paso de parámetros}
+
+\begin{itemize}
+    \item \textbf{Por valor:} se pasa una copia del dato. Cambios en la función no afectan al original.
+    \item \textbf{Por referencia:} se pasa la dirección de la variable con \texttt{\&}. Cambios afectan al original.
+\end{itemize}
+
+\begin{lstlisting}[language=C++]
+// Paso por valor
+void incrementar(int x) {
+    x = x + 1;  // cambia solo copia local
+}
+
+// Paso por referencia
+void incrementarRef(int &x) {
+    x = x + 1;  // cambia variable original
+}
+
+int main() {
+    int a = 5, b = 5;
+    incrementar(a);
+    incrementarRef(b);
+    std::cout << "a = " << a << std::endl; // a = 5
+    std::cout << "b = " << b << std::endl; // b = 6
+    return 0;
+}
+\end{lstlisting}
+
+\section{Funciones con valores por defecto}
+
+Se pueden definir valores predeterminados para los parámetros.
+
+\begin{lstlisting}[language=C++]
+int multiplicar(int a, int b = 2) {
+    return a * b;
+}
+
+int main() {
+    std::cout << multiplicar(5) << std::endl;    // 10
+    std::cout << multiplicar(5, 3) << std::endl; // 15
+    return 0;
+}
+\end{lstlisting}
+
+\section{Sobrecarga de funciones}
+
+C++ permite definir varias funciones con el mismo nombre pero diferente número o tipo de parámetros.
+
+\begin{lstlisting}[language=C++]
+int area(int lado) {
+    return lado * lado;
+}
+
+int area(int base, int altura) {
+    return base * altura;
+}
+
+int main() {
+    std::cout << area(4) << std::endl;       // 16
+    std::cout << area(3, 5) << std::endl;    // 15
+    return 0;
+}
+\end{lstlisting}
+\newpage
+\section{¿Qué es un array?}
+
+Un \textbf{array} (o arreglo) es una estructura de datos que almacena múltiples elementos del mismo tipo en una secuencia contigua de memoria. Permite acceder a cada elemento usando un índice.
+
+\begin{itemize}
+    \item Los índices comienzan en 0.
+    \item Todos los elementos son del mismo tipo.
+    \item El tamaño del array debe ser conocido (y fijo) en tiempo de compilación al declararlo de forma estática.
+\end{itemize}
+
+\section{Declaración y uso}
+
+\begin{lstlisting}[language=C++]
+// Declarar un array de 5 enteros
+int numeros[5] = {10, 20, 30, 40, 50};
+
+// Acceder e imprimir elementos
+std::cout << numeros[0]; // Imprime 10
+\end{lstlisting}
+
+\subsection*{Declaraciones comunes}
+
+\begin{tabular}{|l|l|}
+\hline
+\textbf{Sintaxis} & \textbf{Descripción} \\
+\hline
+\texttt{int a[10];} & Array de 10 enteros \\
+\texttt{float b[3] = \{1.1, 2.2, 3.3\};} & Inicialización con valores \\
+\texttt{char letras[4] = \{'A', 'B', 'C', 'D'\};} & Array de caracteres \\
+\hline
+\end{tabular}
+
+\section{Recorrer un array con un bucle}
+
+\begin{lstlisting}[language=C++]
+int notas[5] = {8, 7, 9, 6, 10};
+
+for (int i = 0; i < 5; i++) {
+    std::cout << "Nota " << i << ": " << notas[i] << std::endl;
+}
+\end{lstlisting}
+
+\section{Modificar valores de un array}
+
+\begin{lstlisting}[language=C++]
+int datos[3];
+datos[0] = 100;
+datos[1] = 200;
+datos[2] = datos[0] + datos[1]; // 300
+\end{lstlisting}
+
+\section{Arrays multidimensionales}
+
+Se pueden declarar arrays de dos o más dimensiones, útiles para representar tablas o matrices.
+
+\begin{lstlisting}[language=C++]
+// Matriz 2x2
+int matriz[2][2] = {
+    {1, 2},
+    {3, 4}
+};
+
+// Acceder al elemento en fila 1, columna 0
+std::cout << matriz[1][0]; // Imprime 3
+\end{lstlisting}
+
+\section{Usar arrays con funciones}
+
+Puedes pasar un array a una función como parámetro. El tamaño no se pasa automáticamente, debes incluirlo.
+
+\begin{lstlisting}[language=C++]
+void mostrar(int arr[], int tam) {
+    for (int i = 0; i < tam; i++) {
+        std::cout << arr[i] << " ";
+    }
+}
+
+int main() {
+    int valores[4] = {1, 2, 3, 4};
+    mostrar(valores, 4);
+    return 0;
+}
+\end{lstlisting}
+
+\section{Limitaciones de arrays tradicionales}
+
+\begin{itemize}
+    \item No se puede cambiar su tamaño una vez declarado.
+    \item No se verifica si los índices están dentro de rango (puede causar errores).
+    \item Poca flexibilidad para tareas más complejas.
+\end{itemize}
+\newpage
+\section{¿Qué es una estructura?}
+
+Una \textbf{estructura} (o \texttt{struct}) en C++ es una forma de agrupar varios datos bajo un mismo nombre. Cada uno de estos datos puede ser de distinto tipo y se llaman \textbf{miembros} o \textbf{atributos}.
+
+\begin{itemize}
+    \item Se utiliza para representar entidades más complejas (por ejemplo: una persona, un producto, un coche, etc.).
+    \item Todos los miembros son accesibles públicamente por defecto (a diferencia de las clases).
+\end{itemize}
+
+\section{Sintaxis básica}
+
+\begin{lstlisting}[language=C++]
+struct Persona {
+    std::string nombre;
+    int edad;
+    float altura;
+};
+\end{lstlisting}
+
+Esto define una nueva estructura llamada \texttt{Persona} con tres atributos: un string, un int y un float.
+
+\section{Declaración y uso}
+
+\begin{lstlisting}[language=C++]
+Persona p;
+p.nombre = "Ana";
+p.edad = 25;
+p.altura = 1.68;
+
+std::cout << p.nombre << " tiene " << p.edad << " años.\n";
+\end{lstlisting}
+
+\section{Inicialización directa}
+
+\begin{lstlisting}[language=C++]
+Persona p = {"Luis", 30, 1.75};
+\end{lstlisting}
+
+\section{Estructuras dentro de funciones}
+
+Puedes pasar estructuras a funciones por valor o por referencia.
+
+\subsection*{Por valor}
+
+\begin{lstlisting}[language=C++]
+void mostrarPersona(Persona p) {
+    std::cout << p.nombre << ", edad: " << p.edad << std::endl;
+}
+\end{lstlisting}
+
+\subsection*{Por referencia}
+
+\begin{lstlisting}[language=C++]
+void modificarEdad(Persona &p) {
+    p.edad += 1;
+}
+\end{lstlisting}
+
+\section{Arrays de estructuras}
+
+Puedes crear un array de estructuras para manejar varios elementos del mismo tipo.
+
+\begin{lstlisting}[language=C++]
+Persona grupo[2] = {
+    {"Carlos", 28, 1.80},
+    {"Lucía", 22, 1.65}
+};
+
+for (int i = 0; i < 2; i++) {
+    std::cout << grupo[i].nombre << std::endl;
+}
+\end{lstlisting}
+
+\section{Anidamiento de estructuras}
+
+Una estructura puede contener otra como miembro.
+
+\begin{lstlisting}[language=C++]
+struct Fecha {
+    int dia, mes, anio;
+};
+
+struct Evento {
+    std::string nombre;
+    Fecha fecha;
+};
+
+Evento reunion = {"Conferencia", {31, 5, 2025}};
+\end{lstlisting}
+
+\section{Comparación con clases}
+
+\begin{itemize}
+    \item En una \texttt{struct}, los miembros son públicos por defecto.
+    \item En una \texttt{class}, los miembros son privados por defecto.
+    \item Ambas pueden tener funciones, constructores y acceso a POO (en C++ moderno).
+\end{itemize}
+\newpage
+\section{¿Qué es una lista enlazada?}
+
+Una \textbf{lista enlazada} es una estructura de datos dinámica que almacena una colección de elementos (nodos), donde cada nodo contiene:
+
+\begin{itemize}
+    \item Un valor o dato.
+    \item Un puntero al siguiente nodo.
+\end{itemize}
+
+A diferencia de los arrays, las listas enlazadas permiten insertar y eliminar elementos sin reorganizar toda la estructura.
+
+\section{Definición de un nodo}
+
+\begin{lstlisting}[language=C++]
+struct Nodo {
+    int dato;
+    Nodo* siguiente;
+};
+\end{lstlisting}
+
+Cada nodo almacena un número entero y un puntero al siguiente nodo de la lista.
+
+\section{Insertar al inicio}
+
+\begin{lstlisting}[language=C++]
+void insertarInicio(Nodo*& cabeza, int valor) {
+    Nodo* nuevo = new Nodo;
+    nuevo->dato = valor;
+    nuevo->siguiente = cabeza;
+    cabeza = nuevo;
+}
+\end{lstlisting}
+
+\textbf{Nota:} \texttt{cabeza} es un puntero al primer nodo (puede ser \texttt{nullptr} si la lista está vacía).
+
+\section{Recorrer la lista}
+
+\begin{lstlisting}[language=C++]
+void mostrar(Nodo* cabeza) {
+    while (cabeza != nullptr) {
+        std::cout << cabeza->dato << " -> ";
+        cabeza = cabeza->siguiente;
+    }
+    std::cout << "NULL\n";
+}
+\end{lstlisting}
+
+\section{Eliminar el primer nodo}
+
+\begin{lstlisting}[language=C++]
+void eliminarInicio(Nodo*& cabeza) {
+    if (cabeza != nullptr) {
+        Nodo* temp = cabeza;
+        cabeza = cabeza->siguiente;
+        delete temp;
+    }
+}
+\end{lstlisting}
+
+\section{Ejemplo completo}
+
+\begin{lstlisting}[language=C++]
+int main() {
+    Nodo* lista = nullptr;
+
+    insertarInicio(lista, 10);
+    insertarInicio(lista, 20);
+    insertarInicio(lista, 30);
+
+    mostrar(lista); // 30 -> 20 -> 10 -> NULL
+
+    eliminarInicio(lista);
+    mostrar(lista); // 20 -> 10 -> NULL
+
+    return 0;
+}
+\end{lstlisting}
+
+\section{Ventajas y desventajas}
+
+\subsection*{Ventajas}
+\begin{itemize}
+    \item Tamaño dinámico.
+    \item Inserciones y eliminaciones eficientes al inicio o entre nodos.
+\end{itemize}
+
+\subsection*{Desventajas}
+\begin{itemize}
+    \item Acceso secuencial (no se puede acceder por índice).
+    \item Uso de memoria adicional para los punteros.
+\end{itemize}
+
+\section{Variantes de listas enlazadas}
+
+\begin{itemize}
+    \item \textbf{Simplemente enlazada:} cada nodo apunta solo al siguiente.
+    \item \textbf{Doblemente enlazada:} cada nodo apunta al siguiente y al anterior.
+    \item \textbf{Circular:} el último nodo apunta al primero.
+\end{itemize}
+\newpage
+\section{Lista Doblemente Enlazada}
+
+Una \textbf{lista doblemente enlazada} es una estructura donde cada nodo tiene un puntero al siguiente y al anterior nodo. Esto permite recorrerla en ambas direcciones.
+
+\subsection*{Definición de nodo}
+
+\begin{lstlisting}[language=C++]
+struct Nodo {
+    int dato;
+    Nodo* siguiente;
+    Nodo* anterior;
+};
+\end{lstlisting}
+
+\subsection*{Insertar al inicio}
+
+\begin{lstlisting}[language=C++]
+void insertarInicio(Nodo*& cabeza, int valor) {
+    Nodo* nuevo = new Nodo;
+    nuevo->dato = valor;
+    nuevo->anterior = nullptr;
+    nuevo->siguiente = cabeza;
+    if (cabeza != nullptr)
+        cabeza->anterior = nuevo;
+    cabeza = nuevo;
+}
+\end{lstlisting}
+
+\subsection*{Mostrar hacia adelante y atrás}
+
+\begin{lstlisting}[language=C++]
+void mostrar(Nodo* cabeza) {
+    Nodo* temp = cabeza;
+    while (temp != nullptr) {
+        std::cout << temp->dato << " ";
+        if (temp->siguiente == nullptr) break;
+        temp = temp->siguiente;
+    }
+
+    std::cout << "\nAl revés:\n";
+    while (temp != nullptr) {
+        std::cout << temp->dato << " ";
+        temp = temp->anterior;
+    }
+}
+\end{lstlisting}
+
+\section{Lista Circular Simple}
+
+Una \textbf{lista circular simple} enlaza el último nodo con el primero, formando un ciclo. Útil cuando se quiere recorrer continuamente sin regresar a NULL.
+
+\subsection*{Definición y ejemplo}
+
+\begin{lstlisting}[language=C++]
+struct Nodo {
+    int dato;
+    Nodo* siguiente;
+};
+
+void insertarCircular(Nodo*& cabeza, int valor) {
+    Nodo* nuevo = new Nodo{valor, nullptr};
+    if (!cabeza) {
+        cabeza = nuevo;
+        nuevo->siguiente = cabeza;
+    } else {
+        Nodo* temp = cabeza;
+        while (temp->siguiente != cabeza)
+            temp = temp->siguiente;
+        temp->siguiente = nuevo;
+        nuevo->siguiente = cabeza;
+    }
+}
+\end{lstlisting}
+
+\subsection*{Recorrer circularmente}
+
+\begin{lstlisting}[language=C++]
+void mostrarCircular(Nodo* cabeza) {
+    if (!cabeza) return;
+    Nodo* temp = cabeza;
+    do {
+        std::cout << temp->dato << " ";
+        temp = temp->siguiente;
+    } while (temp != cabeza);
+}
+\end{lstlisting}
+
+\section{Lista Circular Doble}
+
+Combina las características de lista doble y circular. El último nodo apunta al primero y viceversa.
+
+\subsection*{Definición de nodo}
+
+\begin{lstlisting}[language=C++]
+struct Nodo {
+    int dato;
+    Nodo* siguiente;
+    Nodo* anterior;
+};
+\end{lstlisting}
+
+\subsection*{Insertar al final}
+
+\begin{lstlisting}[language=C++]
+void insertarFinal(Nodo*& cabeza, int valor) {
+    Nodo* nuevo = new Nodo{valor, nullptr, nullptr};
+    if (!cabeza) {
+        cabeza = nuevo;
+        cabeza->siguiente = cabeza;
+        cabeza->anterior = cabeza;
+    } else {
+        Nodo* ultimo = cabeza->anterior;
+        nuevo->siguiente = cabeza;
+        nuevo->anterior = ultimo;
+        ultimo->siguiente = nuevo;
+        cabeza->anterior = nuevo;
+    }
+}
+\end{lstlisting}
+
+\subsection*{Recorrer en ambas direcciones}
+
+\begin{lstlisting}[language=C++]
+void mostrarCircularDoble(Nodo* cabeza) {
+    if (!cabeza) return;
+    Nodo* temp = cabeza;
+    do {
+        std::cout << temp->dato << " ";
+        temp = temp->siguiente;
+    } while (temp != cabeza);
+
+    std::cout << "\nReversa:\n";
+    temp = cabeza->anterior;
+    Nodo* inicio = temp;
+    do {
+        std::cout << temp->dato << " ";
+        temp = temp->anterior;
+    } while (temp != inicio);
+}
+\end{lstlisting}
+\newpage
+\section{¿Qué es una cola?}
+
+Una \textbf{cola (queue)} es una estructura de datos lineal en la que los elementos se insertan por un extremo (final o \textit{rear}) y se eliminan por el otro (inicio o \textit{front}). Sigue el principio FIFO: \textit{First-In, First-Out}.
+
+\section{Operaciones básicas}
+
+\begin{itemize}
+    \item \texttt{enqueue()}: insertar un elemento al final.
+    \item \texttt{dequeue()}: eliminar el elemento del frente.
+    \item \texttt{front()}: obtener el primer elemento.
+    \item \texttt{empty()}: verificar si la cola está vacía.
+\end{itemize}
+
+\section{Implementación con lista enlazada}
+
+\subsection*{Definición de nodo y cola}
+
+\begin{lstlisting}[language=C++]
+struct Nodo {
+    int dato;
+    Nodo* siguiente;
+};
+
+struct Cola {
+    Nodo* frente;
+    Nodo* final;
+};
+\end{lstlisting}
+
+\subsection*{Inicializar cola}
+
+\begin{lstlisting}[language=C++]
+void inicializar(Cola &c) {
+    c.frente = nullptr;
+    c.final = nullptr;
+}
+\end{lstlisting}
+
+\subsection*{Encolar (enqueue)}
+
+\begin{lstlisting}[language=C++]
+void encolar(Cola &c, int valor) {
+    Nodo* nuevo = new Nodo{valor, nullptr};
+    if (c.final != nullptr)
+        c.final->siguiente = nuevo;
+    else
+        c.frente = nuevo;
+    c.final = nuevo;
+}
+\end{lstlisting}
+
+\subsection*{Desencolar (dequeue)}
+
+\begin{lstlisting}[language=C++]
+void desencolar(Cola &c) {
+    if (c.frente != nullptr) {
+        Nodo* temp = c.frente;
+        c.frente = c.frente->siguiente;
+        if (c.frente == nullptr)
+            c.final = nullptr;
+        delete temp;
+    }
+}
+\end{lstlisting}
+
+\subsection*{Mostrar elementos}
+
+\begin{lstlisting}[language=C++]
+void mostrar(Cola c) {
+    Nodo* actual = c.frente;
+    while (actual != nullptr) {
+        std::cout << actual->dato << " ";
+        actual = actual->siguiente;
+    }
+}
+\end{lstlisting}
+
+\section{Uso de \texttt{std::queue} (STL)}
+
+C++ ofrece una cola lista para usar a través de la biblioteca estándar (\texttt{<queue>}).
+
+\begin{lstlisting}[language=C++]
+#include <iostream>
+#include <queue>
+
+int main() {
+    std::queue<int> cola;
+
+    cola.push(10); // enqueue
+    cola.push(20);
+    cola.push(30);
+
+    std::cout << "Frente: " << cola.front() << std::endl;
+
+    cola.pop(); // dequeue
+
+    while (!cola.empty()) {
+        std::cout << cola.front() << " ";
+        cola.pop();
+    }
+
+    return 0;
+}
+\end{lstlisting}
+
+\section{Aplicaciones de las colas}
+
+\begin{itemize}
+    \item Manejo de tareas (jobs) en sistemas operativos.
+    \item Procesamiento en primer llegado, primer atendido.
+    \item Impresoras, llamadas, buffers de datos.
+    \item Algoritmos como BFS (búsqueda en anchura).
+\end{itemize}
+
+\section{Colas circulares}
+
+Una \textbf{cola circular} reutiliza el espacio de forma cíclica. Es útil cuando se trabaja con arrays y memoria fija.
+
+\subsection*{Ejemplo de lógica simple}
+
+\begin{itemize}
+    \item Se usa un array con índices \texttt{front} y \texttt{rear}.
+    \item Si \texttt{rear} llega al final del array, vuelve al inicio.
+    \item Se controla si la cola está llena o vacía con condiciones específicas.
+\end{itemize}
+\newpage
+\section{¿Qué es una pila?}
+
+Una \textbf{pila (stack)} es una estructura de datos lineal que sigue el principio \textbf{LIFO} (\textit{Last-In, First-Out}), donde el último elemento en entrar es el primero en salir.
+
+\section{Operaciones básicas}
+
+\begin{itemize}
+    \item \texttt{push()}: insertar un elemento.
+    \item \texttt{pop()}: eliminar el elemento del tope.
+    \item \texttt{top()}: obtener el elemento del tope.
+    \item \texttt{empty()}: verificar si la pila está vacía.
+\end{itemize}
+
+\section{Implementación con lista enlazada}
+
+\subsection*{Definición de nodo y pila}
+
+\begin{lstlisting}[language=C++]
+struct Nodo {
+    int dato;
+    Nodo* siguiente;
+};
+
+struct Pila {
+    Nodo* tope;
+};
+\end{lstlisting}
+
+\subsection*{Inicializar pila}
+
+\begin{lstlisting}[language=C++]
+void inicializar(Pila &p) {
+    p.tope = nullptr;
+}
+\end{lstlisting}
+
+\subsection*{Push (insertar)}
+
+\begin{lstlisting}[language=C++]
+void push(Pila &p, int valor) {
+    Nodo* nuevo = new Nodo{valor, p.tope};
+    p.tope = nuevo;
+}
+\end{lstlisting}
+
+\subsection*{Pop (eliminar)}
+
+\begin{lstlisting}[language=C++]
+void pop(Pila &p) {
+    if (p.tope != nullptr) {
+        Nodo* temp = p.tope;
+        p.tope = p.tope->siguiente;
+        delete temp;
+    }
+}
+\end{lstlisting}
+
+\subsection*{Mostrar pila}
+
+\begin{lstlisting}[language=C++]
+void mostrar(Pila p) {
+    Nodo* actual = p.tope;
+    while (actual != nullptr) {
+        std::cout << actual->dato << " ";
+        actual = actual->siguiente;
+    }
+}
+\end{lstlisting}
+
+\section{Uso de \texttt{std::stack} (STL)}
+
+C++ incluye una pila lista para usar con la librería \texttt{<stack>}.
+
+\begin{lstlisting}[language=C++]
+#include <iostream>
+#include <stack>
+
+int main() {
+    std::stack<int> pila;
+
+    pila.push(10);
+    pila.push(20);
+    pila.push(30);
+
+    std::cout << "Tope: " << pila.top() << std::endl;
+
+    pila.pop();
+
+    while (!pila.empty()) {
+        std::cout << pila.top() << " ";
+        pila.pop();
+    }
+
+    return 0;
+}
+\end{lstlisting}
+
+\section{Aplicaciones de las pilas}
+
+\begin{itemize}
+    \item Manejo de llamadas a funciones (stack de ejecución).
+    \item Deshacer operaciones (Ctrl+Z).
+    \item Evaluación de expresiones matemáticas.
+    \item Recorrido DFS (búsqueda en profundidad).
+\end{itemize}
+\newpage
+\section{¿Qué es la recursión?}
+
+La \textbf{recursión} es una técnica de programación donde una función se llama a sí misma para resolver un problema.
+
+\begin{itemize}
+    \item Un problema grande se divide en subproblemas más pequeños del mismo tipo.
+    \item Cada llamada reduce el tamaño del problema.
+    \item Requiere una \textbf{condición base} para detener la recursión.
+\end{itemize}
+
+\section{Estructura básica}
+
+\begin{lstlisting}[language=C++]
+void funcion() {
+    if (condicion_base) {
+        // detener
+    } else {
+        funcion(); // llamada recursiva
+    }
+}
+\end{lstlisting}
+
+\section{Ejemplo 1: Factorial}
+
+\begin{lstlisting}[language=C++]
+int factorial(int n) {
+    if (n == 0) return 1; // caso base
+    return n * factorial(n - 1);
+}
+\end{lstlisting}
+
+\section{Ejemplo 2: Fibonacci}
+
+\begin{lstlisting}[language=C++]
+int fibonacci(int n) {
+    if (n <= 1) return n;
+    return fibonacci(n - 1) + fibonacci(n - 2);
+}
+\end{lstlisting}
+
+\textbf{Nota:} Esta versión es simple pero ineficiente. Puede mejorarse con memoria o iteración.
+
+\section{Ejemplo 3: Suma de elementos de un arreglo}
+
+\begin{lstlisting}[language=C++]
+int suma(int arr[], int n) {
+    if (n == 0) return 0;
+    return arr[n - 1] + suma(arr, n - 1);
+}
+\end{lstlisting}
+
+\section{Ventajas de la recursión}
+
+\begin{itemize}
+    \item Código más limpio y natural en problemas jerárquicos.
+    \item Útil para algoritmos de búsqueda, recorrido de árboles, fractales.
+    \item Reduce la necesidad de bucles complejos.
+\end{itemize}
+
+\section{Desventajas}
+
+\begin{itemize}
+    \item Consume más memoria (pila de llamadas).
+    \item Puede causar desbordamiento de pila si no tiene condición base adecuada.
+    \item A menudo menos eficiente que soluciones iterativas.
+\end{itemize}
+
+\section{Buenas prácticas}
+
+\begin{itemize}
+    \item Siempre incluir una \textbf{condición base clara}.
+    \item Preferir recursión de cola (\textit{tail recursion}) si es posible.
+    \item Usar memoización o técnicas híbridas cuando sea necesario.
+\end{itemize}
+
+\section{Comparación con iteración}
+
+\begin{tabular}{|l|l|}
+\hline
+\textbf{Recursión} & \textbf{Iteración} \\
+\hline
+Elegante, compacta & Más eficiente \\
+Consume más memoria & Usa menos pila \\
+Difícil de depurar & Fácil de rastrear \\
+Natural para estructuras recursivas & Mejor para procesamiento secuencial \\
+\hline
+\end{tabular}
+\end{document}
+
+
+\end{document}
